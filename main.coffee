@@ -1,9 +1,6 @@
 #!/usr/bin/coffee
 
-wiki = require './wikiscrape'
-wtf = require 'wtf_wikipedia'
-
-
+wiki = require './wiki_api'
 
 removeComments = (articleText) -> articleText.replace  /<!--[\s\S]*?-->/g, ''
 parseFlatlist = (lines) ->

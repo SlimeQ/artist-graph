@@ -54,7 +54,7 @@ if !module.parent
         console.log error
       console.log body
   else
-    console.log 'Usage: ./wikiscrape.coffee #{title}'
+    console.log 'Usage: ./wiki_api.coffee #{title}'
 
 module.exports =
   search : getArticle
