@@ -26,22 +26,25 @@ getArticle = (title, callback) ->
 
       max_len = 0
       max_key = undefined
-      page = Object.keys body.query.pages
-      if page.length > 1
-        # console.log page
-        for num in page
-          # console.log body.query.pages[num].revisions
-          if body.query.pages[num].revisions != undefined
-            len = body.query.pages[num].revisions[0]['*'].length
-            if len > max_len
-              max_key = num
-              max_len = len
-        # console.log max_key
-      else
-        max_key = page[0]
-      if body.query.pages[max_key] == undefined or body.query.pages[max_key].revisions == undefined
-        return callback "no content found"
-      return callback null, response, body.query.pages[max_key].revisions[0]['*']
+      try
+        page = Object.keys body.query.pages
+        if page.length > 1
+          # console.log page
+          for num in page
+            # console.log body.query.pages[num].revisions
+            if body.query.pages[num].revisions != undefined
+              len = body.query.pages[num].revisions[0]['*'].length
+              if len > max_len
+                max_key = num
+                max_len = len
+          # console.log max_key
+        else
+          max_key = page[0]
+        if body.query.pages[max_key] == undefined or body.query.pages[max_key].revisions == undefined
+          return callback "no content found"
+        return callback null, response, body.query.pages[max_key].revisions[0]['*']
+      catch err
+        return callback(err, response, body)
 
 if !module.parent
   if process.argv.length > 2
